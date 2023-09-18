@@ -1,28 +1,47 @@
-// import path
-// import express
-// import express sessions
-// import express handlebars
-// import routes path
-// import helpers path
+//Import path
+const path = require('path');
 
-// import connection as sequelize
+//Import express, session, handlebars
+const express = require('express');
+const session = require('express-session');
+const handlebars = require('express-handlebars');
 
-// Create sequelize connection storage
+//Import routes, config data
+const routes = require('./Routes');
+require('dotenv').config();
 
-// Start express
-// Define a post
+//Get sequelize connection
+const sequelize = require('./Config/connection');
+//Create a Sequelize Store for an express session
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-//configure sequelize store session
+//Start express
+const expApp = express();
+const PORT = process.env.PORT || 3001;
 
-// add express session and store to express
+//Create an express session with a SequelizeStore and apply it to express
+const sessionObject = {
+    secret: process.env.SESSION_SECRET,
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelize
+    })
+};
+expApp.use(session(sessionObject));
 
-//add handlebars engine
-// set the handlebars engine
+//Create a handlebars engine and apply it to express
+expApp.engine('handlebars', handlebars.engine);
+expApp.set('view engine', 'handlebars');
 
-// use json
-// use urlencoded
-// use public folder
+//Configure express with routes
+expApp.use(express.json());
+expApp.use(express.urlencoded({ extended: true }));
+expApp.use(express.static(path.join(__dirname, 'public')));
+expApp.use(routes);
 
-// use routes
-
-// start server
+//Initialize express
+sequelize.sync({ force: false }).then(() => {
+    expApp.listen(PORT, () => console.log('Now listening'));
+});
