@@ -7,7 +7,7 @@ router.get('/', async (request, response) => {
     try {
         response.render('homepage', {
             logged_in: true,
-            page: 'The Tech Blog'
+            page: 'The California Moonshine Society Blog'
         });
     }
     catch(error) {
