@@ -7,7 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>California Moonshine Society Blog</title>
     <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/blog_main.css" />
+    {{#if login}}
+    <link rel="stylesheet" href="/css/blog_login.css" />
+    {{/if}}
+    {{#if register}}
+    <link rel="stylesheet" href="/css/blog_register.css" />
+    {{/if}}
+    {{#if dashboard}}
+    <link rel="stylesheet" href="/css/blog_dashboard.css" />
+    {{/if}}
+    {{#if post}}
+    <link rel="stylesheet" href="/css/blog_post.css" />
+    {{/if}}
 </head>
 <body>
     <header>
