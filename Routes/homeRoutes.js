@@ -1,11 +1,22 @@
-//import router
-//import user
-//import auth
+const router = require('express').Router();
+//const { User, Post } = require('../models');
+//const withAuth = require('../utils/auth');
 
-//get home page
+
+router.get('/', async (request, response) => {
+    try {
+        response.render('homepage', {
+            logged_in: true,
+            page: 'The Tech Blog'
+        });
+    }
+    catch(error) {
+        response.status(500).json(error);
+    }
+})
 
 //get login page
 
 //redirect to login if not logged in with Dashboard
 
-//export router
+module.exports = router
