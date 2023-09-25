@@ -1,6 +1,3 @@
-Utils/auth.js
-Utils/helpers.js
-
 Controllers/postController.js
 Controllers/userController.js
 

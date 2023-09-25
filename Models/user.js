@@ -10,7 +10,11 @@ const sequelize = require('../Config/connection');
  * @param string password - Must be a minimum of 8 characters
  * Password is hashed on creation and update.
  */
-class User extends Model {}
+class User extends Model {
+    checkPassword(loginPassword) {
+        return bcrypt.compareSync(loginPassword, this.password);
+    }
+}
 
 User.init(
     {

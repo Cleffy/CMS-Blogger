@@ -1,3 +1,11 @@
-// function checks if logged in, or redirects to login
+//Checks to see if user is logged in before accessing dashboard
+const withAuth = (request, response, next) => {
+    if(!request.session.logged_in) {
+        response.redirect('/login');
+    }
+    else {
+        next();
+    }
+}
 
-// export withAuth function
+module.exports = withAuth;
