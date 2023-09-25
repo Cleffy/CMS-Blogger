@@ -1,1 +1,4 @@
-//Will decided what to put here later
+//Get post
+//Create post
+//Delete post
+//Update post
