@@ -1,19 +1,22 @@
-const { User, Post } = require('../Models');
+const { User } = require('../Models');
 
 /**
  * @function userLogin
- * @param {*} email - email of user
- * @param {*} password - password of user
+ * @param {STRING} email - email of user
+ * @param {STRING} password - password of user
  * @returns On successful login returns userdata.
  */
 async function userLogin(email, password) {
     try {
-        const userData = await User.findOne({ where: { email: email } });
+        const userData = await User.findOne(
+            { 
+                where: { email: email } 
+            });
         if(!userData) {
             return Promise.resolve(
                 {
                     status: 400,
-                    message: 'User does no exist'
+                    message: 'User does not exist'
                 });
         }
 
@@ -40,18 +43,19 @@ async function userLogin(email, password) {
 
 /**
  * @function createUser
- * @param {*} name - name of user
- * @param {*} email - email of user
- * @param {*} password - password of user
+ * @param {STRING} name - name of user
+ * @param {STRING} email - email of user
+ * @param {STRING} password - password of user
  * @returns User's information
  */
 async function createUser(name, email, password){
     try {
-        return await User.create({
-            name: name,
-            email: email,
-            password: password
-        });
+        return await User.create(
+            {
+                name: name,
+                email: email,
+                password: password
+            });
 
     }
     catch(error) {
