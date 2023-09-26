@@ -181,4 +181,4 @@ async function updatePost(id, title, content){
     }
 }
 
-module.exports = { getPost, getAllPosts, getUserPosts, createPost, deletePost, updatePost};
+module.exports = { getPost, getAllPosts, getUserPosts, createPost, deletePost, updatePost };

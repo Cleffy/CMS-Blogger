@@ -1,5 +1,3 @@
-Routes/API/postRoutes.js
-
 Seeds/postData.json
 Seeds/userData.json
 Seeds/seed.js
