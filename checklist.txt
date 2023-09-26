@@ -1,4 +1,3 @@
-Routes/homeRoutes.js
 Routes/index.js
 Routes/API/index.js
 Routes/API/postRoutes.js

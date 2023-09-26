@@ -1,22 +1,69 @@
 const router = require('express').Router();
-//const { User, Post } = require('../models');
-//const withAuth = require('../utils/auth');
 
-
-router.get('/', async (request, response) => {
+//Home route
+router.get('/', (request, response) => {
     try {
-        response.render('homepage', {
-            logged_in: true,
-            page: 'The California Moonshine Society Blog'
-        });
+        response.render('homepage');
     }
     catch(error) {
         response.status(500).json(error);
     }
-})
+});
 
-//get login page
+//Route to login
+router.get('/login', (request, response) => {
+    try {
+        if(request.session.logged_in) {
+            response.redirect('/');
+            return;
+        }
+        response.render('login');
+    }
+    catch(error) {
+        response.status(500).json(error);
+    }
+});
 
-//redirect to login if not logged in with Dashboard
+//Route to register a new user
+router.get('/register', (request, response) => {
+    try {
+        if(request.session.logged_in) {
+            response.redirect('/');
+            return;
+        }
+        response.render('register');
+    }
+    catch(error) {
+        response.status(500).json(error);
+    }
+});
+
+//Route to manage a user's posts
+router.get('/dashboard', (request, response) => {
+    try {
+        if(!request.session.logged_in) {
+            response.redirect('/login');
+            return;
+        }
+        response.render('dashboard');
+    }
+    catch(error) {
+        response.status(500).json(error);
+    }
+});
+
+//Route to create a new post
+router.get('/post', (request, response) => {
+    try {
+        if(!request.session.logged_in) {
+            response.redirect('/login');
+            return;
+        }
+        response.render('post');
+    }
+    catch(error) {
+        response.status(500).json(error);
+    }
+});
 
 module.exports = router
