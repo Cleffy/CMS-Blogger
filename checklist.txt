@@ -1,5 +1,3 @@
-Routes/index.js
-Routes/API/index.js
 Routes/API/postRoutes.js
 Routes/API/userRoutes.js
 

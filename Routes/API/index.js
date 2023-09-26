@@ -1,8 +1,8 @@
-//import router
-//import userRoutes
-//import postRoutes
+const router = require('express').Router();
+const userRoutes = require('./userRoutes');
+const postRoutes = require('./postRoutes');
 
-//use user routes
-//use post routes
+router.use('/users', userRoutes);
+router.use('/posts', postRoutes);
 
-//export router
+module.exports = router;
