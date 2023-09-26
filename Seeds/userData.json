@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "Whiskey Pete",
+        "email": "KleanKentuckyBurboun@hotmail.com",
+        "password": "APassword"
+    },
+    {
+        "id": 2,
+        "name": "The Handlebar Mustouche",
+        "email": "Gibson@gmail.com",
+        "password": "ScarvesAndBars"
+    }
+]

@@ -1,9 +1,17 @@
-// import connection as sequelize
-//import user and post
+const sequelize = require('../Config/connection');
+const { User, Post } = require('../Models');
 
-//get user data json
-//get post data json
+const userSeedData = require('./userData.json');
+const postSeedData = require('./postData.json');
 
-//seed database function
+async function seedDatabase(){
+    await sequelize.sync({ force: true });
+    await User.bulkCreate(userSeedData);
+    postSeedData.forEach(post => {
+        let newText = post.content.join();
+        post.content = newText;
+    })
+    await Post.bulkCreate(postSeedData);
+}
 
-//call seed database
+seedDatabase();
