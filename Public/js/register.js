@@ -1,14 +1,15 @@
-async function loginFormHandler(event) {
+async function registerFormHandler(event) {
     event.preventDefault();
 
-    const email = document.querySelector('#email-login').value.trim();
-    const password = document.querySelector('#password-login').value.trim();
-    const error = document.querySelector('#error-login');
+    const name = document.querySelector('#name-register').value.trim();
+    const email = document.querySelector('#email-register').value.trim();
+    const password = document.querySelector('#password-register').value.trim();
+    const error = document.querySelector('#error-register');
 
-    if(email && password) {
+    if(name && email && password) {
         const response = await fetch('/api/users/login', {
             method: 'POST',
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ name, email, password }),
             headers: { 'Content-Type': 'application/json'}
         });
 
@@ -16,13 +17,19 @@ async function loginFormHandler(event) {
             document.location.replace('/')
         }
         else {
-            error.value = "Failed to login."
+            error.value = "Failed to register."
             setTimeout(() => {
                 error.value = '';
             }, 5000);
         }
     }
     else{
+        if(!name) {
+            error.value = "Enter a name"
+            setTimeout(() => {
+                error.value = '';
+            }, 5000);
+        }
         if(!email) {
             error.value = "Enter an email"
             setTimeout(() => {
@@ -38,4 +45,4 @@ async function loginFormHandler(event) {
     }
 }
 
-document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
+document.querySelector('.register-form').addEventListener('submit', registerFormHandler);

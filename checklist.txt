@@ -1,9 +1,6 @@
-Seeds/postData.json
-Seeds/userData.json
-Seeds/seed.js
-
 Public/js/login.js
 Public/js/logout.js
+Public/js/register.js
 
 Views/layouts/main.handlebars
 Views/homepage.handlebars
