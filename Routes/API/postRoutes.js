@@ -27,12 +27,12 @@ router.post('/', async (request, response) => {
         if(postData.status == 500) {
             response
                 .status(postData.status)
-                .json(postData.message);
+                .json({message: postData.message});
             return;
         }
         response
             .status(200)
-            .json({ post: postData, message: 'Post created' });
+            .json(postData);
     }
     catch(error) {
         response
@@ -88,12 +88,12 @@ router.get('/:id', async (request, response) => {
         if(postData.status == 400 || postData.status == 500) {
             response
                 .status(postData.status)
-                .json(postData.message);
+                .json({message: postData.message});
             return;
         }
         response
             .status(200)
-            .json({ post: postData, message: 'Post fetched.' });
+            .json(postData);
     }
     catch(error) {
         response.status(500).json(error);
@@ -109,12 +109,12 @@ router.get('/', async (request, response) => {
         if(postData.status == 400 || postData.status == 500) {
             response
                 .status(postData.status)
-                .json(postData.message);
+                .json({message: postData.message});
             return;
         }
         response
             .status(200)
-            .json({ post: postData, message: 'All posts fetched.' });
+            .json(postData);
     }
     catch(error) {
         response.status(500).json(error);
@@ -132,12 +132,12 @@ router.get('/users/:id', async (request, response) => {
         if(postData.status == 400 || postData.status == 500) {
             response
                 .status(postData.status)
-                .json(postData.message);
+                .json({message: postData.message});
             return;
         }
         response
             .status(200)
-            .json({ post: postData, message: 'All posts fetched from user.' });
+            .json(postData);
     }
     catch(error) {
         response.status(500).json(error);

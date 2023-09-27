@@ -1,9 +1,14 @@
 const router = require('express').Router();
 
 //Home route
-router.get('/', (request, response) => {
+router.get('/', async (request, response) => {
     try {
-        response.render('homepage');
+        response.render('homepage', 
+        {
+            title: 'California Moonshine Society Blog',
+            style: 'blog_home.css',
+            script: 'homepage.js'
+        });
     }
     catch(error) {
         response.status(500).json(error);
@@ -17,7 +22,12 @@ router.get('/login', (request, response) => {
             response.redirect('/');
             return;
         }
-        response.render('login');
+        response.render('login', 
+        {
+            title: 'CMS - Login',
+            style: 'blog_user.css',
+            script: 'login.js'
+        });
     }
     catch(error) {
         response.status(500).json(error);
@@ -31,7 +41,12 @@ router.get('/register', (request, response) => {
             response.redirect('/');
             return;
         }
-        response.render('register');
+        response.render('register', 
+        {
+            title: 'CMS - Register',
+            style: 'blog_user.css',
+            script: 'register.js'
+        });
     }
     catch(error) {
         response.status(500).json(error);
@@ -45,7 +60,12 @@ router.get('/dashboard', (request, response) => {
             response.redirect('/login');
             return;
         }
-        response.render('dashboard');
+        response.render('dashboard', 
+        {
+            title: 'CMS - Dashboard',
+            style: 'blog_dashboard.css',
+            script: 'dashboard.js'
+        });
     }
     catch(error) {
         response.status(500).json(error);
@@ -59,7 +79,12 @@ router.get('/createPost', (request, response) => {
             response.redirect('/login');
             return;
         }
-        response.render('createPost');
+        response.render('createPost', 
+        {
+            title: 'CMS - New Post',
+            style: 'blog_post.css',
+            script: 'createPost.js'
+        });
     }
     catch(error) {
         response.status(500).json(error);
@@ -73,7 +98,12 @@ router.get('/updatePost', (request, response) => {
             response.redirect('/login');
             return;
         }
-        response.render('updatePost');
+        response.render('updatePost', 
+        {
+            title: 'CMS - Update Post',
+            style: 'blog_post.css',
+            script: 'updatePost.js'
+        });
     }
     catch(error) {
         response.status(500).json(error);

@@ -1,9 +1,9 @@
-async function logoutFormHandler(event) {
-    event.preventDefault();
-
-    const error = document.querySelector('#error-logout');
-
-    const response = await fetch('/api/users/logout', {
+/**
+ * logoutHandler
+ * Logs the user out and goes to home
+ */
+async function logoutHandler() {
+const response = await fetch('/api/users/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'}
     });
@@ -11,12 +11,6 @@ async function logoutFormHandler(event) {
     if(response.ok) {
         document.location.replace('/');
     }
-    else {
-        error.value = "Failed to logout."
-        setTimeout(() => {
-            error.value = '';
-        }, 5000);
-    }
 }
 
-document.querySelector('.logout-form').addEventListener('submit', logoutFormHandler);
+document.getElementById('logout').addEventListener('click', logoutHandler);

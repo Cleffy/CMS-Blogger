@@ -23,4 +23,5 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
   [GitHub - Cleffy](https://github.com/Cleffy/)  
 
   Bing Chat with GPT-4
+  Esterling Accime Express Tutorials https://www.youtube.com/playlist?list=PLurIMwd6GdCi3ssXNAcjZ2l5mYaTfYPhf
   

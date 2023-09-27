@@ -18,7 +18,7 @@ router.post('/login', async (request, response) => {
         if(userData.status == 400 || userData.status == 500) {
             response
                 .status(userData.status)
-                .json(userData.message);
+                .json({message: userData.message});
             return;
         }
         request.session.save(() => {
@@ -27,7 +27,7 @@ router.post('/login', async (request, response) => {
 
             response
                 .status(200)
-                .json({ user: userData, message: 'User logged in.' });
+                .json(userData);
         });
     } 
     catch(error) {
@@ -69,7 +69,7 @@ router.post('/register', async (request, response) => {
         if(userData.status == 500) {
             response
                 .status(userData.status)
-                .json(userData.message);
+                .json({message: userData.message});
             return;
         }
         request.session.save(() => {
@@ -78,7 +78,7 @@ router.post('/register', async (request, response) => {
 
             response
                 .status(200)
-                .json({ user: userData, message: 'User logged in.' });
+                .json(userData);
         });
     } 
     catch(error) {
