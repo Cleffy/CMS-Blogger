@@ -1,13 +1,10 @@
-Public/js/login.js
-Public/js/logout.js
-Public/js/register.js
-
 Views/layouts/main.handlebars
 Views/homepage.handlebars
 Views/register.handlebars
 Views/login.handlebars
 Views/dashboard.handlebars
-Views/post.handlebars
+Views/createPost.handlebars
+Views/updatePost.handlebars
 
 Public/css/blog_dashboard.css
 Public/css/blog_login.css

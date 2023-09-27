@@ -42,7 +42,7 @@ router.post('/', async (request, response) => {
 });
 
 /**
- * Create Post
+ * Update Post
  * request.body
  * {
  *      id: ,

@@ -53,13 +53,27 @@ router.get('/dashboard', (request, response) => {
 });
 
 //Route to create a new post
-router.get('/post', (request, response) => {
+router.get('/createPost', (request, response) => {
     try {
         if(!request.session.logged_in) {
             response.redirect('/login');
             return;
         }
-        response.render('post');
+        response.render('createPost');
+    }
+    catch(error) {
+        response.status(500).json(error);
+    }
+});
+
+//Route to update a post
+router.get('/updatePost', (request, response) => {
+    try {
+        if(!request.session.logged_in) {
+            response.redirect('/login');
+            return;
+        }
+        response.render('updatePost');
     }
     catch(error) {
         response.status(500).json(error);

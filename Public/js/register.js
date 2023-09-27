@@ -14,7 +14,7 @@ async function registerFormHandler(event) {
         });
 
         if(response.ok) {
-            document.location.replace('/')
+            document.location.replace('/');
         }
         else {
             error.value = "Failed to register."
