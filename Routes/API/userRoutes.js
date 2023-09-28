@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { 
     userLogin, 
-    createUser 
+    createUser,
+    getUserName 
 } = require('../../Controllers/userController');
 
 /**
@@ -81,6 +82,31 @@ router.post('/register', async (request, response) => {
                 .json(userData);
         });
     } 
+    catch(error) {
+        response.status(500).json(error);
+    }
+});
+
+/**
+ * Get user name
+ * request.params
+ *      id - User ID
+ * Returns name of user
+ */
+router.get('/name/:id', async (request, response) => {
+    try {
+        console.log('I am here');
+        const userData = await getUserName(request.params.id);
+        if(userData.status == 400 || userData.status == 500) {
+            response
+                .status(userData.status)
+                .json({message: userData.message});
+            return;
+        }
+        response
+            .status(200)
+            .json(userData);
+    }
     catch(error) {
         response.status(500).json(error);
     }

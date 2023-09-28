@@ -82,7 +82,7 @@ router.delete('/:id', async (request, response) => {
  * request.params
  *      id - Post ID
  */
-router.get('/:id', async (request, response) => {
+router.get('/single/:id', async (request, response) => {
     try {
         const postData = await getPost(request.params.id);
         if(postData.status == 400 || postData.status == 500) {

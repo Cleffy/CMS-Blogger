@@ -68,4 +68,34 @@ async function createUser(name, email, password){
     }
 }
 
-module.exports = { userLogin, createUser };
+/**
+ * @function getUserName
+ * @param {INT} id - ID of user
+ * @returns - name of user
+ */
+async function getUserName(id){
+    try {
+        const userData = await User.findOne(
+            {
+                where: { id: id }
+            });
+        if(!userData) {
+            return Promise.resolve(
+                {
+                    status: 400,
+                    message: 'User does not exist'
+                });
+        }
+
+        return Promise.resolve(userData.name);
+    }
+    catch(error) {
+        console.error(error);
+        return Promise.resolve(
+            {
+                status: 500,
+                message: 'Error creating user'
+            });
+    }
+}
+module.exports = { userLogin, createUser, getUserName };

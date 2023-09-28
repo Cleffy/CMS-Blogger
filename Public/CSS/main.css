@@ -1,0 +1,39 @@
+:root {
+    --backgroundColor: #eeeee4;
+    --contrastColor: #21130d;
+    --subsidaryColor: #ababab;
+}
+body {
+    background-color: var(--backgroundColor);
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+header {
+    padding: 16px;
+    background-color: var(--contrastColor);
+}
+nav {
+    display: inline;
+}
+.nav-link {
+    color: var(--backgroundColor);
+    text-decoration: none;
+    font-size: 12pt;
+    padding: 5px;
+}
+
+.nav-link:hover {
+    color: var(--contrastColor);
+    background-color: var(--backgroundColor);
+    border-radius: 10px;
+}
+
+h1 {
+    background-color: var(--backgroundColor);
+    color: var(--contrastColor);
+    padding: 8px;
+    font-size: 24pt;
+    border-radius: 10px;
+    width: fit-content;
+    box-shadow: 10px 10px var(--subsidaryColor);
+}

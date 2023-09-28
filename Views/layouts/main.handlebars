@@ -6,20 +6,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="/CSS/reset.css" />
     <link rel="stylesheet" href="/CSS/main.css" />
     <link rel="stylesheet" href="/CSS/{{ style }}" />
 </head>
 <body>
     <header>
         <nav>
-            <a href="/">Home</a>
+            <a class="nav-link" href="/">Home</a>
             {{#if logged_in}}
-            <a href="/dashboard">Dashboard</a>
-            <span id="logout">Logout</span>
+            <a class="nav-link" href="/dashboard">Dashboard</a>
+            <span class="nav-link" id="logout">Logout</span>
             {{else}}
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/register">Register</a>
             {{/if}}
         </nav>
         <h1>{{ title }}</h1>
