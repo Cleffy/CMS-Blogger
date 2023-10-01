@@ -8,6 +8,7 @@ const { User } = require('../Models');
  */
 async function userLogin(email, password) {
     try {
+        
         const userData = await User.findOne(
             { 
                 where: { email: email } 
@@ -19,7 +20,6 @@ async function userLogin(email, password) {
                     message: 'User does not exist'
                 });
         }
-
         const validPassword = await userData.checkPassword(password);
         if(!validPassword) {
             return Promise.resolve(

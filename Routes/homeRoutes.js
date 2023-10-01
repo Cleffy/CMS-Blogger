@@ -7,7 +7,7 @@ router.get('/', async (request, response) => {
         {
             title: 'California Moonshine Society Blog',
             style: 'blog_home.css',
-            script: 'homepage.js'
+            logged_in: request.session.logged_in
         });
     }
     catch(error) {
@@ -25,8 +25,7 @@ router.get('/login', (request, response) => {
         response.render('login', 
         {
             title: 'CMS - Login',
-            style: 'blog_user.css',
-            script: 'login.js'
+            style: 'blog_user.css'
         });
     }
     catch(error) {
@@ -44,8 +43,7 @@ router.get('/register', (request, response) => {
         response.render('register', 
         {
             title: 'CMS - Register',
-            style: 'blog_user.css',
-            script: 'register.js'
+            style: 'blog_user.css'
         });
     }
     catch(error) {
@@ -63,8 +61,7 @@ router.get('/dashboard', (request, response) => {
         response.render('dashboard', 
         {
             title: 'CMS - Dashboard',
-            style: 'blog_dashboard.css',
-            script: 'dashboard.js'
+            style: 'blog_dashboard.css'
         });
     }
     catch(error) {
@@ -82,8 +79,7 @@ router.get('/createPost', (request, response) => {
         response.render('createPost', 
         {
             title: 'CMS - New Post',
-            style: 'blog_post.css',
-            script: 'createPost.js'
+            style: 'blog_post.css'
         });
     }
     catch(error) {
@@ -101,8 +97,7 @@ router.get('/updatePost', (request, response) => {
         response.render('updatePost', 
         {
             title: 'CMS - Update Post',
-            style: 'blog_post.css',
-            script: 'updatePost.js'
+            style: 'blog_post.css'
         });
     }
     catch(error) {

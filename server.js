@@ -20,17 +20,12 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-//Create a handlebars engine and apply it to express
-app.engine('handlebars', handlebars.engine(
-    { 
-        defaultLayout: 'main' 
-    }));
-app.set('view engine', 'handlebars');
-
 app.use(session(
     {
         secret: process.env.SESSION_SECRET,
-        cookie: {},
+        cookie: {
+            maxAge: 30 * 24 * 60 * 60 * 1000
+        },
         resave: false,
         saveUninitialized: true,
         store: new SequelizeStore({
@@ -38,6 +33,13 @@ app.use(session(
         })
     }
 ));
+
+//Create a handlebars engine and apply it to express
+app.engine('handlebars', handlebars.engine(
+    { 
+        defaultLayout: 'main' 
+    }));
+app.set('view engine', 'handlebars');
 
 //Configure express with routes
 app.use(express.json());

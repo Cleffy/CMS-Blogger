@@ -1,0 +1,21 @@
+.form {
+    background-color: var(--contrastColor);
+    margin: 12px auto;
+    width: fit-content;
+    border-radius: 2px;
+}
+
+#loginForm{
+    display: inline-block;
+    background-color: var(--backgroundColor);
+    margin: 4px;
+    padding: 4px;
+    border-radius: 2px;
+    text-align: right;
+} 
+
+#loginError {
+    color: red;
+    margin: 8px;
+    text-align: center;
+}

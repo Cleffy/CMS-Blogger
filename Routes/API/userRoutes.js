@@ -23,12 +23,13 @@ router.post('/login', async (request, response) => {
             return;
         }
         request.session.save(() => {
-            request.session.user_id = userData.isSoftDeleted;
+            console.log(request.session);
+            request.session.user_id = userData.id;
             request.session.logged_in = true;
 
             response
                 .status(200)
-                .json(userData);
+                .json({ user: userData, message: 'You are now logged in' });
         });
     } 
     catch(error) {
@@ -74,12 +75,12 @@ router.post('/register', async (request, response) => {
             return;
         }
         request.session.save(() => {
-            request.session.user_id = userData.isSoftDeleted;
+            request.session.user_id = userData.id;
             request.session.logged_in = true;
 
             response
                 .status(200)
-                .json(userData);
+                .json({ user: userData, message: 'You are now registered' });
         });
     } 
     catch(error) {
