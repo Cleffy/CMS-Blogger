@@ -95,7 +95,6 @@ router.post('/register', async (request, response) => {
  */
 router.get('/name/:id', async (request, response) => {
     try {
-        console.log('I am here');
         const userData = await getUserName(request.params.id);
         if(userData.status == 400 || userData.status == 500) {
             response
