@@ -1,5 +1,3 @@
-collapse comments
-
 Views/layouts/main.handlebars
 Views/homepage.handlebars
 Views/register.handlebars
