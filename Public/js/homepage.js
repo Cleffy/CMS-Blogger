@@ -72,7 +72,7 @@ async function renderPosts(){
         let titleEl = document.createElement('h3');
         let contentEl = document.createElement('p');
         let authorEl = document.createElement('p');
-        contentEl.classList.add('content');
+        contentEl.classList.add('content')
         titleEl.innerText = post.title;
         contentEl.innerText = post.content;
         authorEl.innerText = `Created by ${author} on ${post.created_at}`;
@@ -84,9 +84,8 @@ async function renderPosts(){
         if(loggedIn) {
             addCommentButton(post.id, postEl);
         }
-
+        addExpandButton(post.id, postEl);
         postsSectionEl.appendChild(postEl);
-        await renderComments(post.id, postEl);
     }
 }
 
@@ -102,19 +101,32 @@ async function renderPosts(){
  */
 async function renderComments(postID, postEl){
     const comments = await getPostComments(postID);
+    let commentEl = document.createElement('div');
+    commentEl.classList.add('comment');
     for(let comment of comments){
         const author = await getAuthor(comment.author_id);
-        let commentEl = document.createElement('div');
         let contentEl = document.createElement('p');
         let authorEl = document.createElement('p');
-        commentEl.classList.add('comment');
         contentEl.classList.add('content');
         contentEl.innerText = comment.content;
         authorEl.innerText = `Created by ${author} on ${comment.created_at}`;
-        postEl.appendChild(commentEl);
         commentEl.appendChild(contentEl);
         commentEl.appendChild(authorEl);
     }
+    let collapseLink = document.createElement('span');
+    collapseLink.classList.add('nav-link');
+    collapseLink.id = `collapse-${postID}`;
+    collapseLink.innerText = 'Collapse';
+    postEl.appendChild(commentEl);
+    postEl.appendChild(collapseLink);
+
+    collapseLink.addEventListener('click', async function(event) {
+        event.preventDefault();
+
+        commentEl.remove();
+        collapseLink.remove();
+        addExpandButton(postID, postEl);
+    });
 }
 
 /**
@@ -190,4 +202,19 @@ function addCommentButton(postID, postEl) {
             addCommentForm(postID, postEl);
             commentLink.remove();
         });
+}
+
+function addExpandButton(postID, postEl) {
+    let expandLink = document.createElement('span');
+    expandLink.classList.add('nav-link');
+    expandLink.id = `expand-${postID}`;
+    expandLink.innerText = 'Expand';
+    postEl.appendChild(expandLink);
+
+    //Event Listener to expand comments
+    expandLink.addEventListener('click', async function(event) {
+        event.preventDefault();
+        await renderComments(postID, postEl);
+        expandLink.remove();
+    });
 }
