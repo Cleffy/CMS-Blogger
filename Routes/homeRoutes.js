@@ -7,7 +7,8 @@ router.get('/', async (request, response) => {
         {
             title: 'California Moonshine Society Blog',
             style: 'blog_home.css',
-            logged_in: request.session.logged_in
+            logged_in: request.session.logged_in,
+            user_id: request.session.user_id
         });
     }
     catch(error) {

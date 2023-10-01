@@ -1,6 +1,33 @@
 const { Comment } = require('../Models');
 
 /**
+ * @function createComment
+ * @param {TEXT} content - content of post
+ * @param {INT} userID - User ID of author
+ * @param {INT} postID - User ID of author
+ * @returns created comment data
+ */
+async function createComment(content, userID, postID){
+    try {
+        return await Comment.create(
+            {
+                content: content,
+                author_id: userID,
+                post_id: postID
+            }
+        );
+    }
+    catch(error) {
+        console.error(error);
+        return Promise.resolve(
+            {
+                status: 500,
+                message: 'Error creating Comment'
+            });
+    }
+}
+
+/**
  * @function getPostComments
  * @param {INT} id - id of Post
  * @returns Comment data
@@ -122,4 +149,4 @@ async function deleteComment(id){
     }
 }
 
-module.exports = { getComment, getPostComments, getUserComments, deleteComment };
+module.exports = { createComment, getComment, getPostComments, getUserComments, deleteComment };
