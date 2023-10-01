@@ -1,6 +1,7 @@
 article {
     background-color: var(--contrastColor);
     margin: 16px;
+    padding: 4px;
     border-radius: 2px;
 }
 h3 {
@@ -28,7 +29,11 @@ p {
     margin-left: 12px;
     margin-bottom: 4px;
 }
-
+.comment {
+    margin: 4px;
+    border-radius: 2px;
+    background-color: var(--backgroundColor);
+}
 .comment p{
     margin-left: auto;
     margin-right: 8px;
