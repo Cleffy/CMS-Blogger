@@ -6,19 +6,25 @@ article {
 h3 {
     color: var(--subsidaryColor);
     font-size: 16pt;
-    padding: 8px;
-    padding-left: 16px;
+    margin: 4px;
+    margin-left: 16px;
 }
 p {
     color: var(--subsidaryColor);
     font-size: 12pt;
-    padding: 8px;
-    padding-left: 16px;
+    margin: 0;
+    margin-left: 16px;
 }
 .content {
     background-color: var(--backgroundColor);
     color: var(--contrastColor);
     margin: 4px;
+    padding: 4px;
     padding-left: 12px;
     border-radius: 2px;
+}
+
+#posts span {
+    margin-left: 12px;
+    margin-bottom: 4px;
 }

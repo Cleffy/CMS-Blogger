@@ -74,10 +74,11 @@ async function renderPosts(){
         titleEl.innerText = post.title;
         contentEl.innerText = post.content;
         authorEl.innerText = `Created by ${author} on ${post.created_at}`;
-        commentEl.innerHTML = `{{if logged_in}}<span class="nav-link" id="post-${post.id}">Comment</span>{{/if}}`;
+        commentEl.innerHTML = `<span class="nav-link" id="post-${post.id}">Comment</span>`;
         postEl.appendChild(titleEl);
         postEl.appendChild(contentEl);
         postEl.appendChild(authorEl);
+        postEl.appendChild(commentEl);
         postsSectionEl.appendChild(postEl);
         commentLink = document.getElementById('post-' + post.id);
         if(commentLink) {

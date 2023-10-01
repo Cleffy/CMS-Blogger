@@ -1,15 +1,11 @@
 Views/layouts/main.handlebars
 Views/homepage.handlebars
 Views/register.handlebars
-Views/login.handlebars
 Views/dashboard.handlebars
 Views/createPost.handlebars
 Views/updatePost.handlebars
 
 Public/css/blog_dashboard.css
-Public/css/blog_login.css
 Public/css/blog_main.css
 Public/css/blog_post.css
-Public/css/blog_register.css
-Public/css/reset.css
 
