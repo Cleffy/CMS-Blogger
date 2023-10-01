@@ -24,6 +24,7 @@ nav {
 }
 
 .nav-link:hover {
+    cursor: pointer;
     color: var(--contrastColor);
     background-color: var(--backgroundColor);
     border-radius: 10px;
