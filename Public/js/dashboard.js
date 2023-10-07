@@ -1,3 +1,11 @@
+window.onload = async function(){
+    await renderPostList();
+}
+
+async function renderPostList(){
+
+}
+
 async function getUserPosts(id){
     const response = await fetch('/api/posts/users/' + id, {
         method: 'GET',

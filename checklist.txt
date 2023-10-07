@@ -1,6 +1,4 @@
 Views/layouts/main.handlebars
-Views/homepage.handlebars
-Views/register.handlebars
 Views/dashboard.handlebars
 Views/createPost.handlebars
 Views/updatePost.handlebars

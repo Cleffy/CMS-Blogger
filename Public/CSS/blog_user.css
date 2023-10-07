@@ -5,7 +5,7 @@
     border-radius: 2px;
 }
 
-#loginForm{
+#loginForm, #registerForm {
     display: inline-block;
     background-color: var(--backgroundColor);
     margin: 4px;
@@ -14,7 +14,7 @@
     text-align: right;
 } 
 
-#loginError {
+#loginError, #registerError {
     color: red;
     margin: 8px;
     text-align: center;

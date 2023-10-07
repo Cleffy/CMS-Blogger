@@ -32,16 +32,16 @@ async function loginFormHandler(event) {
     }
     else{
         if(!email) {
-            error.value = "Enter an email"
+            error.innerText = "Enter an email"
             setTimeout(() => {
-                error.value = '';
-            }, 5000);
+                error.innerText = '';
+            }, 2500);
         }
         if(!password) {
-            error.value = "Enter a password"
+            error.innerText = "Enter a password"
             setTimeout(() => {
-                error.value = '';
-            }, 5000);
+                error.innerText = '';
+            }, 2500);
         }
     }
 }

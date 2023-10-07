@@ -23,8 +23,8 @@ router.post('/login', async (request, response) => {
             return;
         }
         request.session.save(() => {
-            console.log(request.session);
             request.session.user_id = userData.id;
+            request.session.user_name = userData.name;
             request.session.logged_in = true;
 
             response
@@ -76,6 +76,7 @@ router.post('/register', async (request, response) => {
         }
         request.session.save(() => {
             request.session.user_id = userData.id;
+            request.session.user_name = userData.name;
             request.session.logged_in = true;
 
             response

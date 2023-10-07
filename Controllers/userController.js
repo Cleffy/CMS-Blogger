@@ -56,7 +56,6 @@ async function createUser(name, email, password){
                 email: email,
                 password: password
             });
-
     }
     catch(error) {
         console.error(error);
