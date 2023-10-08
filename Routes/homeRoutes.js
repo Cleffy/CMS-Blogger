@@ -63,6 +63,8 @@ router.get('/dashboard', (request, response) => {
         {
             title: 'CMS - Dashboard',
             style: 'blog_dashboard.css',
+            logged_in: request.session.logged_in,
+            user_id: request.session.user_id,
             user_name: request.session.user_name
         });
     }

@@ -69,10 +69,77 @@ function renderFocusedPost(post){
 }
 
 async function updateTitle(post, titleDiv){
+    titleDiv.innerText = '';
+    const formEl = document.createElement('form');
+    const labelEl = document.createElement('label');
+    const inputEl = document.createElement('input');
+    const submitEl = document.createElement('button');
 
+    formEl.classList.add('titleForm');
+    labelEl.innerText = 'Title:';
+    labelEl.setAttribute('for', 'title' + post.id);
+    inputEl.value = post.title;
+    inputEl.setAttribute('type', 'text');
+    inputEl.setAttribute('id', 'title' + post.id);
+    submitEl.innerText = 'Update';
+    submitEl.setAttribute('type', 'submit');
+
+    formEl.appendChild(labelEl);
+    formEl.appendChild(inputEl);
+    formEl.appendChild(submitEl);
+
+    titleDiv.appendChild(formEl);
+
+    submitEl.addEventListener('submit', async function(event){
+        event.preventDefault();
+        const title = document.getElementById('title' + post.id).value;
+        const response = await fetch('/api/posts/' + post.id, {
+            method: 'PUT',
+            body: JSON.stringify({ title }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        if(response.ok){
+            await renderPostList();
+            await renderFocusedPost(post);
+        }
+    });
 }
-async function updateContent(post, contentDiv){
 
+async function updateContent(post, contentDiv){
+    contentDiv.innerText = '';
+    const formEl = document.createElement('form');
+    const labelEl = document.createElement('label');
+    const inputEl = document.createElement('input');
+    const submitEl = document.createElement('button');
+
+    formEl.classList.add('contentForm');
+    labelEl.innerText = 'Content:';
+    labelEl.setAttribute('for', 'content' + post.id);
+    inputEl.value = post.content;
+    inputEl.setAttribute('type', 'text');
+    inputEl.setAttribute('id', 'content' + post.id);
+    submitEl.innerText = 'Update';
+    submitEl.setAttribute('type', 'submit');
+
+    formEl.appendChild(labelEl);
+    formEl.appendChild(inputEl);
+    formEl.appendChild(submitEl);
+
+    contentDiv.appendChild(formEl);
+
+    submitEl.addEventListener('submit', async function(event){
+        event.preventDefault();
+        const content = document.getElementById('content' + post.id).value;
+        const response = await fetch('/api/posts/' + post.id, {
+            method: 'PUT',
+            body: JSON.stringify({ content }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        if(response.ok){
+            await renderPostList();
+            await renderFocusedPost(post);
+        }
+    });
 }
 
 async function getUserPosts(id){
@@ -82,7 +149,7 @@ async function getUserPosts(id){
     });
 
     if(response.ok){
-        return response;
+        return await response.json();
     }
 }
 
