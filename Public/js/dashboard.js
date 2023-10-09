@@ -23,7 +23,7 @@ async function renderPostList(){
 
         titleEl.addEventListener('click', async function(){
             await renderFocusedPost(post);
-        });
+        }, { once: true });
         deleteLink.addEventListener('click', async function(){
             await deletePost(post.id);
             await renderPostList();
@@ -109,14 +109,15 @@ async function updateContent(post, contentDiv){
     contentDiv.innerText = '';
     const formEl = document.createElement('form');
     const labelEl = document.createElement('label');
-    const inputEl = document.createElement('input');
+    const inputEl = document.createElement('textarea');
     const submitEl = document.createElement('button');
 
     formEl.classList.add('contentForm');
     labelEl.innerText = 'Content:';
     labelEl.setAttribute('for', 'content' + post.id);
     inputEl.value = post.content;
-    inputEl.setAttribute('type', 'text');
+    inputEl.rows = 10;
+    inputEl.cols = 50;
     inputEl.setAttribute('id', 'content' + post.id);
     submitEl.innerText = 'Update';
     submitEl.setAttribute('type', 'submit');

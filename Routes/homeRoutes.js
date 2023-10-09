@@ -62,7 +62,7 @@ router.get('/dashboard', (request, response) => {
         response.render('dashboard', 
         {
             title: 'CMS - Dashboard',
-            style: 'blog_dashboard.css',
+            style: 'blog_home.css',
             logged_in: request.session.logged_in,
             user_id: request.session.user_id,
             user_name: request.session.user_name
