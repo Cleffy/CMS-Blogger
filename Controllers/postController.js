@@ -124,7 +124,7 @@ async function createPost(title, content, userID){
  */
 async function deletePost(id){
     try {
-        await Post.destroy(
+        const postData = await Post.destroy(
             {
                 where: { id: id }
             }
@@ -133,8 +133,7 @@ async function deletePost(id){
             {
                 status: 200,
                 message: 'Deleted post'
-            }
-        );
+            });
     }
     catch(error) {
         console.error(error);
@@ -155,7 +154,7 @@ async function deletePost(id){
  */
 async function updatePost(id, title, content){
     try {
-        await Post.update(
+        const postData = await Post.update(
             {
                 title: title,
                 content: content
@@ -168,8 +167,7 @@ async function updatePost(id, title, content){
             {
                 status: 200,
                 message: 'Updated post'
-            }
-        );
+            });
     }
     catch(error) {
         console.error(error);

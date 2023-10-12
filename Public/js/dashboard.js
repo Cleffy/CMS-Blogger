@@ -1,14 +1,29 @@
 const mainEl = document.getElementById('main');
+let postFocus = null;
 window.onload = async function(){
-    await renderPostList();
+    await drawDashboard();
 }
 
-async function renderPostList(){
+async function drawDashboard(){
     const posts = await getUserPosts(main.dataset.user);
+    if(posts.length > 0){
+        renderPostList(posts);
+    }
+    if(postFocus !== null){
+        renderFocusedPost();
+    }
+    else{
+        const postFocusEl = document.getElementById('postFocus');
+        postFocusEl.style.display = 'none';
+    }
+}
+
+function renderPostList(posts){
     const postListEl = document.getElementById('postList');
+    postListEl.innerHTML = '';
     for(let post of posts){
         const articleEl = document.createElement('article');
-        const titleEl = document.createElement('h3');
+        const titleEl = document.createElement('h4');
         const deleteLink = document.createElement('span');
 
         titleEl.innerText = post.title;
@@ -21,17 +36,20 @@ async function renderPostList(){
 
         postListEl.appendChild(articleEl);
 
-        titleEl.addEventListener('click', async function(){
-            await renderFocusedPost(post);
-        }, { once: true });
+        if(postFocus === null || postFocus.id !== post.id){
+            titleEl.addEventListener('click', async function(){
+                postFocus = post;
+                await drawDashboard();
+            }, { once: true });
+        }
         deleteLink.addEventListener('click', async function(){
-            await deletePost(post.id);
-            await renderPostList();
+            const response = await deletePost(post.id);
+            await drawDashboard();
         });
     }
 }
 
-function renderFocusedPost(post){
+function renderFocusedPost(){
     const postFocusEl = document.getElementById('postFocus');
     const postEl = document.createElement('article');
     const titleDiv = document.createElement('div');
@@ -41,14 +59,18 @@ function renderFocusedPost(post){
     const contentEl = document.createElement('p');
     const updateContentLink = document.createElement('span');
 
-    titleEl.innerText = post.title;
-    contentEl.innerText = post.content;
+    postFocusEl.style.display = 'block';
+    postFocusEl.innerHTML = '';
+    titleEl.innerText = postFocus.title;
+    contentEl.innerText = postFocus.content;
     contentEl.classList.add('content');
 
     updateTitleLink.classList.add('nav-link');
     updateContentLink.classList.add('nav-link');
     updateTitleLink.innerText = 'Update';
     updateContentLink.innerText = 'Update';
+
+    contentDiv.setAttribute('id', 'contentDiv' + postFocus.id);
 
     titleDiv.appendChild(titleEl);
     titleDiv.appendChild(updateTitleLink);
@@ -60,15 +82,15 @@ function renderFocusedPost(post){
     postFocusEl.appendChild(postEl);
 
     updateTitleLink.addEventListener('click', async function(){
-        await updateTitle(post, titleDiv); 
+        await updateTitle(titleDiv); 
     });
 
-    updateContentLink.addEventListener('click', async function(){
-        await updateContent(post, contentDiv);
+    updateContentLink.addEventListener('click', function(){
+        updateContent();
     });
 }
 
-async function updateTitle(post, titleDiv){
+async function updateTitle(titleDiv){
     titleDiv.innerText = '';
     const formEl = document.createElement('form');
     const labelEl = document.createElement('label');
@@ -77,10 +99,10 @@ async function updateTitle(post, titleDiv){
 
     formEl.classList.add('titleForm');
     labelEl.innerText = 'Title:';
-    labelEl.setAttribute('for', 'title' + post.id);
-    inputEl.value = post.title;
+    labelEl.setAttribute('for', 'title' + postFocus.id);
+    inputEl.value = postFocus.title;
     inputEl.setAttribute('type', 'text');
-    inputEl.setAttribute('id', 'title' + post.id);
+    inputEl.setAttribute('id', 'title' + postFocus.id);
     submitEl.innerText = 'Update';
     submitEl.setAttribute('type', 'submit');
 
@@ -92,54 +114,38 @@ async function updateTitle(post, titleDiv){
 
     submitEl.addEventListener('submit', async function(event){
         event.preventDefault();
-        const title = document.getElementById('title' + post.id).value;
-        const response = await fetch('/api/posts/' + post.id, {
+        const title = document.getElementById('title' + postFocus.id).value;
+        const response = await fetch('/api/posts/' + postFocus.id, {
             method: 'PUT',
             body: JSON.stringify({ title }),
             headers: { 'Content-Type': 'application/json' }
         });
         if(response.ok){
-            await renderPostList();
-            await renderFocusedPost(post);
+            await drawDashboard();
         }
     });
 }
 
-async function updateContent(post, contentDiv){
+function updateContent(){
+    const contentDiv = document.getElementById('contentDiv' + postFocus.id);
     contentDiv.innerText = '';
-    const formEl = document.createElement('form');
-    const labelEl = document.createElement('label');
     const inputEl = document.createElement('textarea');
-    const submitEl = document.createElement('button');
+    const updateLink = document.createElement('span');
 
-    formEl.classList.add('contentForm');
-    labelEl.innerText = 'Content:';
-    labelEl.setAttribute('for', 'content' + post.id);
-    inputEl.value = post.content;
+    inputEl.value = postFocus.content;
     inputEl.rows = 10;
     inputEl.cols = 50;
-    inputEl.setAttribute('id', 'content' + post.id);
-    submitEl.innerText = 'Update';
-    submitEl.setAttribute('type', 'submit');
+    inputEl.setAttribute('id', 'content' + postFocus.id);
+    updateLink.innerText = 'Update';
+    updateLink.classList.add('nav-link');
 
-    formEl.appendChild(labelEl);
-    formEl.appendChild(inputEl);
-    formEl.appendChild(submitEl);
+    contentDiv.appendChild(inputEl);
+    contentDiv.appendChild(updateLink);
 
-    contentDiv.appendChild(formEl);
-
-    submitEl.addEventListener('submit', async function(event){
-        event.preventDefault();
-        const content = document.getElementById('content' + post.id).value;
-        const response = await fetch('/api/posts/' + post.id, {
-            method: 'PUT',
-            body: JSON.stringify({ content }),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        if(response.ok){
-            await renderPostList();
-            await renderFocusedPost(post);
-        }
+    updateLink.addEventListener('click', async function(){
+        const content = document.getElementById('content' + postFocus.id).value;
+        await updatePost(postFocus.id, postFocus.title, content);
+        await drawDashboard();
     });
 }
 
@@ -154,13 +160,40 @@ async function getUserPosts(id){
     }
 }
 
+/**
+ * deletePost
+ * @param {int} id 
+ * @returns promise
+ * 
+ * deletes post with given id - then returns a promise
+ */
 async function deletePost(id){
-    const response = await fetch('/api/posts/' + id, {
+    if(postFocus !== null && postFocus.id === id){
+        postFocus = null;
+    }
+    return await fetch('/api/posts/' + id, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application.json' }
     });
+}
 
-    if(response.ok){
-        return response;
-    }
+/**
+ * updatePost
+ * @param {int} id 
+ * @param {string} title 
+ * @param {text} content 
+ * @returns promise
+ * 
+ * updates post with given id - then returns a promise
+ */
+async function updatePost(id, title, content){
+    return await fetch('/api/posts/', {
+        method: 'PUT',
+        body: JSON.stringify({
+            id: id,
+            title: title,
+            content: content
+        }),
+        headers: { 'Content-Type': 'application/json' }
+    });
 }

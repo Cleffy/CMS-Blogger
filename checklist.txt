@@ -1,3 +1,6 @@
+dashboard update update focus
+
+
 Views/layouts/main.handlebars
 Views/dashboard.handlebars
 Views/createPost.handlebars

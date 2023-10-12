@@ -52,11 +52,14 @@ router.post('/', async (request, response) => {
  */
 router.put('/', async (request, response) => {
     try {
-        return await updatePost(
+        const postData = await updatePost(
             request.body.id,
             request.body.title,
             request.body.content
         );
+        response
+            .status(postData.status)
+            .json({message: postData.message});
     }
     catch(error) {
         response.status(500).json(error);
@@ -70,7 +73,10 @@ router.put('/', async (request, response) => {
  */
 router.delete('/:id', async (request, response) => {
     try {
-        return await deletePost(request.params.id);
+        const postData =  await deletePost(request.params.id);
+        response
+            .status(postData.status)
+            .json({message: postData.message});
     }
     catch(error) {
         response.status(500).json(error);
