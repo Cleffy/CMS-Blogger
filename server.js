@@ -44,12 +44,12 @@ app.use(function (request, response, next){
 //Create a handlebars engine and apply it to express
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
-app.set('views', './Views');
+app.set('views', './views');
 
 //Configure express with routes
 app.use(express.json({}));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'Public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
 //Initialize express
