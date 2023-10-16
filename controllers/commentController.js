@@ -1,4 +1,4 @@
-const { Comment } = require('../Models');
+const { Comment } = require('../models');
 
 /**
  * @function createComment

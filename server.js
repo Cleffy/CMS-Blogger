@@ -7,12 +7,12 @@ const session = require('express-session');
 const { engine } = require('express-handlebars');
 
 //Import routes, helpers, config
-const routes = require('./Routes');
+const routes = require('./routes');
 //const helpers = require('./Utils/helpers');
 //require('dotenv').config();
 
 //Get sequelize connectionnpm
-const sequelize = require('./Config/connection');
+const sequelize = require('./config/connection');
 //Create a Sequelize Store for an express session
 const sequelizeStore = require('connect-session-sequelize')(session.Store);
 

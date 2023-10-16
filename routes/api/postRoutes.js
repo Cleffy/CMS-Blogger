@@ -6,7 +6,7 @@ const {
     createPost, 
     deletePost, 
     updatePost 
-} = require('../../Controllers/postController')
+} = require('../../controllers/postController')
 
 /**
  * Create Post

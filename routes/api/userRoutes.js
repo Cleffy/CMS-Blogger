@@ -3,7 +3,7 @@ const {
     userLogin, 
     createUser,
     getUserName 
-} = require('../../Controllers/userController');
+} = require('../../controllers/userController');
 
 /**
  * User login

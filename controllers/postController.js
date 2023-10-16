@@ -1,4 +1,4 @@
-const { Post } = require('../Models');
+const { Post } = require('../models');
 
 /**
  * @function getPost

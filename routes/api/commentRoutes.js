@@ -5,7 +5,7 @@ const {
     getPostComments, 
     getUserComments, 
     deleteComment 
-} = require('../../Controllers/commentController');
+} = require('../../controllers/commentController');
 
 
 /**
