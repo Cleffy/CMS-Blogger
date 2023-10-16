@@ -44,7 +44,7 @@ app.use(function (request, response, next){
 //Create a handlebars engine and apply it to express
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
-app.set('views', './views');
+app.set('views', './Views');
 
 //Configure express with routes
 app.use(express.json({}));
