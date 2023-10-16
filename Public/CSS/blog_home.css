@@ -16,11 +16,9 @@ h4 {
     margin: auto;
     margin-left: 16px;
 }
-p {
-    color: var(--subsidaryColor);
-    font-size: 12pt;
-    margin: auto;
-    margin-left: 16px;
+h4:hover {
+    cursor: pointer;
+    color: var(--backgroundColor);
 }
 .content {
     background-color: var(--backgroundColor);
@@ -30,7 +28,28 @@ p {
     padding-left: 12px;
     border-radius: 2px;
 }
+#posts {
+    width: 100%;
+    display: block;
+}
 
+#user {
+    margin: 4px;
+    padding: 4px;
+    padding-left: 12px;
+    border-radius: 2px;
+    background-color: var(--contrastColor);
+    width: 96%;
+}
+#user h2 {
+    background-color: var(--backgroundColor);
+    color: var(--contrastColor);
+    padding: 8px;
+    font-size: 18pt;
+    border-radius: 10px;
+    width: fit-content;
+    box-shadow: 10px 10px var(--subsidaryColor);
+}
 #posts span {
     margin-left: 12px;
     margin-bottom: 4px;

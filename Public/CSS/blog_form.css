@@ -1,20 +1,22 @@
 .form {
     background-color: var(--contrastColor);
     margin: 12px auto;
-    width: fit-content;
+    width: 80%;
     border-radius: 2px;
 }
 
-#loginForm, #registerForm {
+#loginForm, #registerForm, #createPost {
     display: inline-block;
     background-color: var(--backgroundColor);
     margin: 4px;
     padding: 4px;
     border-radius: 2px;
     text-align: right;
+    width: calc(100% - 16px);
+    justify-content: center;
 } 
 
-#loginError, #registerError {
+#loginError, #registerError, #postError {
     color: red;
     margin: 8px;
     text-align: center;

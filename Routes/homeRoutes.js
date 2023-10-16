@@ -26,7 +26,7 @@ router.get('/login', (request, response) => {
         response.render('login', 
         {
             title: 'CMS - Login',
-            style: 'blog_user.css'
+            style: 'blog_form.css'
         });
     }
     catch(error) {
@@ -44,7 +44,7 @@ router.get('/register', (request, response) => {
         response.render('register', 
         {
             title: 'CMS - Register',
-            style: 'blog_user.css'
+            style: 'blog_form.css'
         });
     }
     catch(error) {
@@ -83,25 +83,9 @@ router.get('/createPost', (request, response) => {
         response.render('createPost', 
         {
             title: 'CMS - New Post',
-            style: 'blog_post.css'
-        });
-    }
-    catch(error) {
-        response.status(500).json(error);
-    }
-});
-
-//Route to update a post
-router.get('/updatePost', (request, response) => {
-    try {
-        if(!request.session.logged_in) {
-            response.redirect('/login');
-            return;
-        }
-        response.render('updatePost', 
-        {
-            title: 'CMS - Update Post',
-            style: 'blog_post.css'
+            style: 'blog_form.css',
+            logged_in: request.session.logged_in,
+            user_id: request.session.user_id
         });
     }
     catch(error) {

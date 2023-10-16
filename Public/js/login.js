@@ -46,4 +46,9 @@ async function loginFormHandler(event) {
     }
 }
 
+// Event listener for the login form
 document.getElementById('loginForm').addEventListener('submit', loginFormHandler);
+// Event listener for the back button
+document.getElementById('loginBackButton').addEventListener('click', () => {
+    document.location.replace('/');
+});

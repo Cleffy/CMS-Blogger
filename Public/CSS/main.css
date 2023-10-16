@@ -39,3 +39,44 @@ h1 {
     width: fit-content;
     box-shadow: 10px 10px var(--subsidaryColor);
 }
+p {
+    color: var(--subsidaryColor);
+    font-size: 12pt;
+    margin: auto;
+    margin-left: 16px;
+}
+
+button {
+    background-color: var(--contrastColor);
+    color: var(--backgroundColor);
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 12pt;
+    border: none;
+    margin: 4px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: var(--subsidaryColor);
+}
+
+input {
+    margin: 4px;
+    width: calc(100% - 16px);
+    min-width: 256px;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 12pt;
+}
+
+textarea {
+    margin: 4px;
+    width: calc(100% - 16px);
+    min-width: 256px;
+    height: 30vh;
+    max-height: 512px;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 12pt;
+}

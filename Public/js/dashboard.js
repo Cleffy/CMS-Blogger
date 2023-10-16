@@ -1,9 +1,18 @@
 const mainEl = document.getElementById('main');
 let postFocus = null;
+
+/**
+ * window.onload
+ * When the window loads, draw the dashboard
+ */
 window.onload = async function(){
     await drawDashboard();
 }
 
+/**
+ * drawDashboard
+ * Refreshes the page with the current user's posts
+ */
 async function drawDashboard(){
     const posts = await getUserPosts(main.dataset.user);
     if(posts.length > 0){
@@ -18,6 +27,11 @@ async function drawDashboard(){
     }
 }
 
+/**
+ * renderPostList
+ * @param {array} posts 
+ * Renders a list of post titles
+ */
 function renderPostList(posts){
     const postListEl = document.getElementById('postList');
     postListEl.innerHTML = '';
@@ -49,6 +63,10 @@ function renderPostList(posts){
     }
 }
 
+/**
+ * renderFocusedPost
+ * renders the post in focus
+ */
 function renderFocusedPost(){
     const postFocusEl = document.getElementById('postFocus');
     const postEl = document.createElement('article');
@@ -71,6 +89,7 @@ function renderFocusedPost(){
     updateContentLink.innerText = 'Update';
 
     contentDiv.setAttribute('id', 'contentDiv' + postFocus.id);
+    titleDiv.setAttribute('id', 'titleDiv' + postFocus.id);
 
     titleDiv.appendChild(titleEl);
     titleDiv.appendChild(updateTitleLink);
@@ -81,51 +100,49 @@ function renderFocusedPost(){
     postEl.appendChild(contentDiv);
     postFocusEl.appendChild(postEl);
 
-    updateTitleLink.addEventListener('click', async function(){
-        await updateTitle(titleDiv); 
+    // Event listener to change a title
+    updateTitleLink.addEventListener('click', function(){
+        updateTitle(); 
     });
 
+    // Event listener to change content
     updateContentLink.addEventListener('click', function(){
         updateContent();
     });
 }
 
-async function updateTitle(titleDiv){
+/**
+ * updateTitle
+ * updates the post in focus with the new title
+ */
+function updateTitle(){
+    const titleDiv = document.getElementById('titleDiv' + postFocus.id);
     titleDiv.innerText = '';
-    const formEl = document.createElement('form');
-    const labelEl = document.createElement('label');
     const inputEl = document.createElement('input');
-    const submitEl = document.createElement('button');
+    const updateLink = document.createElement('span');
 
-    formEl.classList.add('titleForm');
-    labelEl.innerText = 'Title:';
-    labelEl.setAttribute('for', 'title' + postFocus.id);
     inputEl.value = postFocus.title;
     inputEl.setAttribute('type', 'text');
     inputEl.setAttribute('id', 'title' + postFocus.id);
-    submitEl.innerText = 'Update';
-    submitEl.setAttribute('type', 'submit');
+    updateLink.innerText = 'Update';
+    updateLink.classList.add('nav-link');
 
-    formEl.appendChild(labelEl);
-    formEl.appendChild(inputEl);
-    formEl.appendChild(submitEl);
+    titleDiv.appendChild(inputEl);
+    titleDiv.appendChild(updateLink);
 
-    titleDiv.appendChild(formEl);
-
-    submitEl.addEventListener('submit', async function(event){
-        event.preventDefault();
+    // Event listener to update the title
+    updateLink.addEventListener('click', async function(){
         const title = document.getElementById('title' + postFocus.id).value;
-        const response = await fetch('/api/posts/' + postFocus.id, {
-            method: 'PUT',
-            body: JSON.stringify({ title }),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        if(response.ok){
-            await drawDashboard();
-        }
+        await updatePost(postFocus.id, title, postFocus.content);
+        postFocus.title = title;
+        await drawDashboard();
     });
 }
 
+/**
+ * updateContent
+ * updates the post in focus with the new content
+ */
 function updateContent(){
     const contentDiv = document.getElementById('contentDiv' + postFocus.id);
     contentDiv.innerText = '';
@@ -142,13 +159,20 @@ function updateContent(){
     contentDiv.appendChild(inputEl);
     contentDiv.appendChild(updateLink);
 
+    // Event listener to update the content
     updateLink.addEventListener('click', async function(){
         const content = document.getElementById('content' + postFocus.id).value;
         await updatePost(postFocus.id, postFocus.title, content);
+        postFocus.content = content;
         await drawDashboard();
     });
 }
 
+/**
+ * getUserPosts
+ * @param {int} id 
+ * @returns returns an array of all posts by user with given id
+ */
 async function getUserPosts(id){
     const response = await fetch('/api/posts/users/' + id, {
         method: 'GET',

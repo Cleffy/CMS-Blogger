@@ -53,4 +53,9 @@ async function registerFormHandler(event) {
     }
 }
 
+// Event listener for the register form
 document.getElementById('registerForm').addEventListener('submit', registerFormHandler);
+// Event listener for the back button
+document.getElementById('registerBackButton').addEventListener('click', () => {
+    document.location.replace('/');
+});

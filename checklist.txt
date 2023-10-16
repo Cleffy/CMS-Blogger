@@ -1,12 +1,1 @@
-dashboard update update focus
-
-
-Views/layouts/main.handlebars
-Views/dashboard.handlebars
-Views/createPost.handlebars
-Views/updatePost.handlebars
-
-Public/css/blog_dashboard.css
-Public/css/blog_main.css
-Public/css/blog_post.css
 
