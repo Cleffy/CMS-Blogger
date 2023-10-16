@@ -1,10 +1,6 @@
 {
   "name": "cms-blogger",
   "version": "1.0.0",
-  "engines": {
-    "node": "18.17.1",
-    "npm": "9.6.7"
-  },
   "description": "CMS-style blog site",
   "main": "server.js",
   "scripts": {
