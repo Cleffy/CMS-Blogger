@@ -49,7 +49,7 @@ app.set('views', './Views');
 //Configure express with routes
 app.use(express.json({}));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'Public')));
+app.use(express.static(__dirname + '/Public'));
 app.use(routes);
 
 //Initialize express
