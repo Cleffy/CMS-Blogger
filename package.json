@@ -2,10 +2,6 @@
   "name": "cms-blogger",
   "version": "1.0.0",
   "description": "CMS-style blog site",
-  "engines": {
-    "node": "12.x",
-    "npm": "6.x"
-  },
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
