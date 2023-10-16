@@ -9,9 +9,9 @@ const { engine } = require('express-handlebars');
 //Import routes, helpers, config
 const routes = require('./Routes');
 //const helpers = require('./Utils/helpers');
-require('dotenv').config();
+//require('dotenv').config();
 
-//Get sequelize connection
+//Get sequelize connectionnpm
 const sequelize = require('./Config/connection');
 //Create a Sequelize Store for an express session
 const sequelizeStore = require('connect-session-sequelize')(session.Store);
